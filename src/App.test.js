@@ -1,14 +1,18 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import App from "./App";
-import { getOutwardPostcode, isValidPostcode } from "./helpers.js";
+import {
+  getOutwardPostCode,
+  isValidPostCode,
+  getPostCodeArray,
+} from "./helpers.js";
 
 test("renders a histogram", () => {});
 
 test("it gets the outward code of a postcode", () => {
   // Given a postcode
   const postcode = "M4 1AB";
-  const returnedValue = getOutwardPostcode(postcode);
+  const returnedValue = getOutwardPostCode(postcode);
   // We get just the outward portion of the postcode
   expect(returnedValue).toEqual("M4");
 });
@@ -16,7 +20,7 @@ test("it gets the outward code of a postcode", () => {
 test("it handles correct postcodes", () => {
   // Given a postcode that is incorrectly formatted e.g using numbers, or the wrong number of characters
   const postcode = "M41 7NP";
-  const returnedValue = isValidPostcode(postcode);
+  const returnedValue = isValidPostCode(postcode);
   // We are returned an error / a null object
   expect(returnedValue).toEqual(true);
 });
@@ -24,7 +28,7 @@ test("it handles correct postcodes", () => {
 test("it handles incorrect postcodes", () => {
   // Given a postcode that is incorrectly formatted e.g using numbers, or the wrong number of characters
   const postcode = "43432432$";
-  const returnedValue = isValidPostcode(postcode);
+  const returnedValue = isValidPostCode(postcode);
   // We are returned an error / a null object
   expect(returnedValue).toEqual(false);
 });
@@ -55,7 +59,7 @@ test("it extracts an array of postcodes from an array of objects", () => {
   ];
 
   // We are returned an array of postcodes
-  expect(getPostcodeArray(data)).toEqual([
+  expect(getPostCodeArray(data)).toEqual([
     "ME12 1ED",
     "ME12 2EF",
     "ME12 4FG",
@@ -64,6 +68,25 @@ test("it extracts an array of postcodes from an array of objects", () => {
     "M22 5HT",
     "M22 1ED",
   ]);
+});
+
+test("it returns an error if list of postcodes is invalid", () => {
+  // Given an invalid array
+  const data = [3232];
+  // We are returned an error
+  expect(getPostCodeArray(data)).toBe("Sorry, that's an invalid array");
+  // Given an invalid array
+  data = {};
+  // We are returned an error
+  expect(getPostCodeArray(data)).toBe("Sorry, that's an invalid array");
+  // Given an invalid array
+  data = 1;
+  // We are returned an error
+  expect(getPostCodeArray(data)).toBe("Sorry, that's an invalid array");
+  // Given an invalid array
+  data = [{}];
+  // We are returned an error
+  expect(getPostCodeArray(data)).toBe("Sorry, that's an invalid array");
 });
 
 test("it returns an array of outward postcodes", () => {
@@ -79,7 +102,7 @@ test("it returns an array of outward postcodes", () => {
   ];
 
   // We are returned an array of postcodes
-  expect(getOutwardPostcodes(data)).toEqual([
+  expect(getOutwardPostCodes(data)).toEqual([
     "ME12",
     "ME12",
     "ME12",
@@ -244,7 +267,9 @@ test("it gets labels for histogram", () => {
   ];
   expect(getHistogramLabels(data).length).toBe(3);
 
-  expect(getHistogramLabels(data).toContain(["ME12 (50%)", "M30 (30%)", "M22 (20%)"]));
+  expect(
+    getHistogramLabels(data).toContain(["ME12 (50%)", "M30 (30%)", "M22 (20%)"])
+  );
 });
 test("it gets labels for histogram", () => {
   const data = [
@@ -266,7 +291,7 @@ test("it gets labels for histogram", () => {
   ];
   expect(getHistogramData(data).length).toBe(3);
 
-  expect(getHistogramData(data).toContain([5,3,2]));
+  expect(getHistogramData(data).toContain([5, 3, 2]));
 });
 //To achieve this, order array by highest number of counts/ percentages
 // test("it produces a list of top 5 postcodes", () => {
