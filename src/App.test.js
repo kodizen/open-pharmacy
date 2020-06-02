@@ -1,78 +1,290 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import App from "./App";
-import {getOutwardPostcode} from './helpers.js'
+import { getOutwardPostcode, isValidPostcode } from "./helpers.js";
 
-
-test("renders a histogram", () => {
- 
-});
-
-test("it groups postcodes without duplicates", () => {
-  // Given a dataset
-  const date = [
-    {
-      postcode: "ME12 1UP",
-    },
-    {
-      postcode: "ME12 1UP",
-    },
-    {
-     
-      postcode: "ME12 1UP",
-    },
-    {
-      postcode: "ME12 1UP",
-    },
-    {
-      postcode: "ME14 1EW",
-    }
-  ];
-
-
-
-  // We get an array of postcodes grouped, without duplicates
-});
+test("renders a histogram", () => {});
 
 test("it gets the outward code of a postcode", () => {
   // Given a postcode
-  const postcode = 'M4 1AB'
+  const postcode = "M4 1AB";
   const returnedValue = getOutwardPostcode(postcode);
   // We get just the outward portion of the postcode
-  expect(returnedValue).toEqual('M4')
+  expect(returnedValue).toEqual("M4");
 });
 
-test("it handles postcodes without spaces", () => {
-  // Given a postcode without spaces
-  // We are returned the correct outward code e.g M4A23 would return M4, M414FG would return M41
+test("it handles correct postcodes", () => {
+  // Given a postcode that is incorrectly formatted e.g using numbers, or the wrong number of characters
+  const postcode = "M41 7NP";
+  const returnedValue = isValidPostcode(postcode);
+  // We are returned an error / a null object
+  expect(returnedValue).toEqual(true);
 });
 
 test("it handles incorrect postcodes", () => {
   // Given a postcode that is incorrectly formatted e.g using numbers, or the wrong number of characters
+  const postcode = "43432432$";
+  const returnedValue = isValidPostcode(postcode);
   // We are returned an error / a null object
+  expect(returnedValue).toEqual(false);
+});
+test("it extracts an array of postcodes from an array of objects", () => {
+  // Given a list of postcodes
+  const data = [
+    {
+      postcode: "ME12 1ED",
+    },
+    {
+      postcode: "ME12 2EF",
+    },
+    {
+      postcode: "ME12 4FG",
+    },
+    {
+      postcode: "M30 5TG",
+    },
+    {
+      postcode: "M30 4EF",
+    },
+    {
+      postcode: "M22 5HT",
+    },
+    {
+      postcode: "M22 1ED",
+    },
+  ];
+
+  // We are returned an array of postcodes
+  expect(getPostcodeArray(data)).toEqual([
+    "ME12 1ED",
+    "ME12 2EF",
+    "ME12 4FG",
+    "M30 5TG",
+    "M30 4EF",
+    "M22 5HT",
+    "M22 1ED",
+  ]);
+});
+
+test("it returns an array of outward postcodes", () => {
+  // Given a list of postcodes
+  const data = [
+    "ME12 1ED",
+    "ME12 2EF",
+    "ME12 4FG",
+    "M30 5TG",
+    "M30 4EF",
+    "M22 5HT",
+    "M22 1ED",
+  ];
+
+  // We are returned an array of postcodes
+  expect(getOutwardPostcodes(data)).toEqual([
+    "ME12",
+    "ME12",
+    "ME12",
+    "M30",
+    "M30",
+    "M22",
+    "M22",
+  ]);
+});
+
+test("it removes duplicates", () => {
+  // Given a dataset
+  const data = ["ME12", "ME12", "ME12", "M30", "M30", "M22", "M22"];
+
+  expect(removeDuplicates(data).length).toBe(3);
+  expect(removeDuplicates(data)).toBe(["ME12", "M30", "M22"]);
 });
 
 test("it includes total count of postcodes", () => {
   // Given a list of postcodes
-  // We are returned an array of postcode objects, with the total count of postcodes as a root property
+  const data = ["ME12", "ME12", "ME12", "M30", "M30", "M22", "M22"];
+
+  // We are returned the total count of postcodes
+  expect(getTotalCount(data)).toEqual(3);
 });
 
-test("it produces a list of postcodes with the  percentage of total amount", () => {
-  // Given an array of postcodes with counts
+test("it gets a postcodes percentage", () => {
+  // Given an array of objects with postcodes
+  const data = [
+    "ME12",
+    "ME12",
+    "ME12",
+    "ME12",
+    "ME12",
+    "M30",
+    "M30",
+    "M22",
+    "M22",
+    "M22",
+  ];
   // We are returned an array of postcode objects, with the percentage of total postcode
+  expect(getPostCodePercentage(data, "ME12")).toBe(50);
+  expect(getPostCodePercentage(data, "M30")).toBe(20);
+  expect(getPostCodePercentage(data, "M22")).toBe(30);
 });
 
-test("it produces a list of top 5 postcodes", () => {
-  // Given a an array of postcodes with counts
-  // We get the top 5 postcodes
+test("it gets a postcodes count", () => {
+  // Given an array of objects with postcodes
+  const data = [
+    {
+      postcode: "ME12",
+    },
+    {
+      postcode: "ME12",
+    },
+    {
+      postcode: "ME12",
+    },
+    {
+      postcode: "ME12",
+    },
+    {
+      postcode: "ME12",
+    },
+    {
+      postcode: "M30",
+    },
+    {
+      postcode: "M30",
+    },
+    {
+      postcode: "M22",
+    },
+    {
+      postcode: "M22",
+    },
+    {
+      postcode: "M22",
+    },
+  ];
+  // We are returned the number of occurrences of the postcode in the original array
+  expect(getPostCodeCount(data, "ME12")).toBe(5);
+  expect(getPostCodeCount(data, "M30")).toBe(2);
+  expect(getPostCodeCount(data, "M22")).toBe(3);
 });
 
-test("it includes the datestamp if one is provided", () => {
-  // Given a datestamp in the object
-  // We are returned the same datestamp
+test("it gets a returned array of correctly formatted postcodes", () => {
+  const data = {
+    data: {
+      date: "2019-01-17T09:34:18.171Z",
+      list: [
+        {
+          postcode: "ME12 1ED",
+        },
+        {
+          postcode: "ME12 2EF",
+        },
+        {
+          postcode: "ME12 4FG",
+        },
+        {
+          postcode: "ME12 2EF",
+        },
+        {
+          postcode: "ME12 4FG",
+        },
+        {
+          postcode: "M30 5TG",
+        },
+        {
+          postcode: "M30 4EF",
+        },
+        {
+          postcode: "M30 4EF",
+        },
+        {
+          postcode: "M22 5HT",
+        },
+        {
+          postcode: "M22 1ED",
+        },
+      ],
+    },
+  };
+
+  expect(getFormattedData(data)).toBe([
+    {
+      postcode: "ME12",
+      count: 5,
+      percentage: 50,
+    },
+    {
+      postcode: "M30",
+      count: 3,
+      percentage: 30,
+    },
+    {
+      postcode: "M22",
+      count: 2,
+      percentage: 20,
+    },
+  ]);
 });
 
-test("it includes todays date as a datestamp if one is not provided", () => {
-  // Given no datestamp in the object
-  // We are returned todays datestamp
+test("it gets labels for histogram", () => {
+  const data = [
+    {
+      postcode: "ME12",
+      count: 5,
+      percentage: 50,
+    },
+    {
+      postcode: "M30",
+      count: 3,
+      percentage: 30,
+    },
+    {
+      postcode: "M22",
+      count: 2,
+      percentage: 20,
+    },
+  ];
+  expect(getHistogramLabels(data).length).toBe(3);
+
+  expect(getHistogramLabels(data).toContain(["ME12 (50%)", "M30 (30%)", "M22 (20%)"]));
 });
+test("it gets labels for histogram", () => {
+  const data = [
+    {
+      postcode: "ME12",
+      count: 5,
+      percentage: 50,
+    },
+    {
+      postcode: "M30",
+      count: 3,
+      percentage: 30,
+    },
+    {
+      postcode: "M22",
+      count: 2,
+      percentage: 20,
+    },
+  ];
+  expect(getHistogramData(data).length).toBe(3);
+
+  expect(getHistogramData(data).toContain([5,3,2]));
+});
+//To achieve this, order array by highest number of counts/ percentages
+// test("it produces a list of top 5 postcodes", () => {
+//   // Given a an array of postcodes with counts
+//   // We get the top 5 postcodes
+//   expect(0).toBe(true)
+// });
+
+// test("it includes the datestamp if one is provided", () => {
+//   // Given a datestamp in the object
+//   // We are returned the same datestamp
+//   expect(0).toBe(true)
+
+// });
+
+// test("it includes todays date as a datestamp if one is not provided", () => {
+//   // Given no datestamp in the object
+//   // We are returned todays datestamp
+//   expect(0).toBe(true)
+
+// });
