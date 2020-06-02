@@ -7,6 +7,7 @@ import {
   getPostCodeArray,
   getOutwardPostCodes,
   removeDuplicates,
+  getTotalCount
 } from "./helpers.js";
 
 test("renders a histogram", () => {});
@@ -129,7 +130,7 @@ test("it removes duplicates", () => {
 
 });
 
-test("it includes total count of postcodes", () => {
+test("it gets total count of postcodes", () => {
   // Given a list of postcodes
   const data = ["ME12", "ME12", "ME12", "M30", "M30", "M22", "M22"];
 

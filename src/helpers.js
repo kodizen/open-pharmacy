@@ -44,6 +44,10 @@ export function getOutwardPostCodes(data) {
 
 export function removeDuplicates(data) {
   // Swanky
-  let unique_array = Array.from(new Set(data))
-  return unique_array
+  let unique_array = Array.from(new Set(data));
+  return unique_array;
 }
+export function getTotalCount(data) {
+  return removeDuplicates(data).length;
+}
+
