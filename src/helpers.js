@@ -50,4 +50,14 @@ export function removeDuplicates(data) {
 export function getTotalCount(data) {
   return removeDuplicates(data).length;
 }
+export function getPostCodeCount(data, postcode){
+    let count = 0
+    for (let index = 0; index < data.length; index++) {
+        if (data[index] === postcode){
+            count++
+        }
+        
+    }
+    return count
+}
 

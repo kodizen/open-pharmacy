@@ -7,7 +7,8 @@ import {
   getPostCodeArray,
   getOutwardPostCodes,
   removeDuplicates,
-  getTotalCount
+  getTotalCount,
+  getPostCodeCount
 } from "./helpers.js";
 
 test("renders a histogram", () => {});
@@ -137,7 +138,25 @@ test("it gets total count of postcodes", () => {
   // We are returned the total count of postcodes
   expect(getTotalCount(data)).toEqual(3);
 });
-
+test("it gets a postcodes count", () => {
+  // Given an array of objects with postcodes
+  const data = [
+    "ME12",
+    "ME12",
+    "ME12",
+    "ME12",
+    "ME12",
+    "M30",
+    "M30",
+    "M22",
+    "M22",
+    "M22",
+  ];
+  // We are returned the number of occurrences of the postcode in the original array
+  expect(getPostCodeCount(data, "ME12")).toBe(5);
+  expect(getPostCodeCount(data, "M30")).toBe(2);
+  expect(getPostCodeCount(data, "M22")).toBe(3);
+});
 test("it gets a postcodes percentage", () => {
   // Given an array of objects with postcodes
   const data = [
@@ -158,45 +177,7 @@ test("it gets a postcodes percentage", () => {
   expect(getPostCodePercentage(data, "M22")).toBe(30);
 });
 
-test("it gets a postcodes count", () => {
-  // Given an array of objects with postcodes
-  const data = [
-    {
-      postcode: "ME12",
-    },
-    {
-      postcode: "ME12",
-    },
-    {
-      postcode: "ME12",
-    },
-    {
-      postcode: "ME12",
-    },
-    {
-      postcode: "ME12",
-    },
-    {
-      postcode: "M30",
-    },
-    {
-      postcode: "M30",
-    },
-    {
-      postcode: "M22",
-    },
-    {
-      postcode: "M22",
-    },
-    {
-      postcode: "M22",
-    },
-  ];
-  // We are returned the number of occurrences of the postcode in the original array
-  expect(getPostCodeCount(data, "ME12")).toBe(5);
-  expect(getPostCodeCount(data, "M30")).toBe(2);
-  expect(getPostCodeCount(data, "M22")).toBe(3);
-});
+
 
 test("it gets a returned array of correctly formatted postcodes", () => {
   const data = {
