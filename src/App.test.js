@@ -5,6 +5,7 @@ import {
   getOutwardPostCode,
   isValidPostCode,
   getPostCodeArray,
+  getOutwardPostCodes
 } from "./helpers.js";
 
 test("renders a histogram", () => {});

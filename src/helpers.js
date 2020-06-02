@@ -21,7 +21,7 @@ export function getPostCodeArray(data) {
   if (data.length === 0) {
     return error;
   }
-  
+
   // Does it contain our property (postcode)?
   if (!data.some((obj) => obj["postcode"])) {
     return error;
@@ -32,4 +32,12 @@ export function getPostCodeArray(data) {
     arr.push(element.postcode);
   });
   return arr;
+}
+
+export function getOutwardPostCodes(data){
+    let arr = []
+    data.forEach(element => {
+        arr.push(getOutwardPostCode(element))
+    });
+    return arr
 }
