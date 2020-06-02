@@ -43,11 +43,12 @@ export function getOutwardPostCodes(data) {
 }
 
 export function removeDuplicates(data) {
-  // Swanky
+  // Needs tests to check for invalid arrays etc.
   let unique_array = Array.from(new Set(data));
   return unique_array;
 }
 export function getTotalCount(data) {
+    // Kinda pointless this one...
   return removeDuplicates(data).length;
 }
 export function getPostCodeCount(data, postcode){
@@ -55,9 +56,12 @@ export function getPostCodeCount(data, postcode){
     for (let index = 0; index < data.length; index++) {
         if (data[index] === postcode){
             count++
-        }
-        
+        }  
     }
     return count
+}
+
+export function getPostCodePercentage(data, postcode){
+    return Math.floor((getPostCodeCount(data, postcode) / data.length) * 100)
 }
 

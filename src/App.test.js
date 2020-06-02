@@ -8,7 +8,8 @@ import {
   getOutwardPostCodes,
   removeDuplicates,
   getTotalCount,
-  getPostCodeCount
+  getPostCodeCount,
+  getPostCodePercentage
 } from "./helpers.js";
 
 test("renders a histogram", () => {});
@@ -157,6 +158,7 @@ test("it gets a postcodes count", () => {
   expect(getPostCodeCount(data, "M30")).toBe(2);
   expect(getPostCodeCount(data, "M22")).toBe(3);
 });
+
 test("it gets a postcodes percentage", () => {
   // Given an array of objects with postcodes
   const data = [
