@@ -10,10 +10,26 @@ export function getOutwardPostCode(postcode) {
 }
 
 export function getPostCodeArray(data) {
+  console.log("getPostCodeArray -> data", data);
+  const error = "Sorry, that's an invalid array";
 
-    let arr = [];
-    data.forEach(element => {
-        arr.push(element.postcode)
-    });
-    return arr
+  // Is it an array?
+  if (!Array.isArray(data)) {
+    return error;
   }
+  // Does it contain anything?
+  if (data.length === 0) {
+    return error;
+  }
+  
+  // Does it contain our property (postcode)?
+  if (!data.some((obj) => obj["postcode"])) {
+    return error;
+  }
+
+  let arr = [];
+  data.forEach((element) => {
+    arr.push(element.postcode);
+  });
+  return arr;
+}

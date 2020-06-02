@@ -72,7 +72,7 @@ test("it extracts an array of postcodes from an array of objects", () => {
 
 test("it returns an error if list of postcodes is invalid", () => {
   // Given an invalid array
-  const data = [3232];
+  let data = [3232];
   // We are returned an error
   expect(getPostCodeArray(data)).toBe("Sorry, that's an invalid array");
   // Given an invalid array
