@@ -34,10 +34,16 @@ export function getPostCodeArray(data) {
   return arr;
 }
 
-export function getOutwardPostCodes(data){
-    let arr = []
-    data.forEach(element => {
-        arr.push(getOutwardPostCode(element))
-    });
-    return arr
+export function getOutwardPostCodes(data) {
+  let arr = [];
+  data.forEach((element) => {
+    arr.push(getOutwardPostCode(element));
+  });
+  return arr;
+}
+
+export function removeDuplicates(data) {
+  // Swanky
+  let unique_array = Array.from(new Set(data))
+  return unique_array
 }

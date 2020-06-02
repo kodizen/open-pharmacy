@@ -5,7 +5,8 @@ import {
   getOutwardPostCode,
   isValidPostCode,
   getPostCodeArray,
-  getOutwardPostCodes
+  getOutwardPostCodes,
+  removeDuplicates,
 } from "./helpers.js";
 
 test("renders a histogram", () => {});
@@ -116,10 +117,16 @@ test("it returns an array of outward postcodes", () => {
 
 test("it removes duplicates", () => {
   // Given a dataset
-  const data = ["ME12", "ME12", "ME12", "M30", "M30", "M22", "M22"];
-
+  let data = ["ME12", "ME12", "ME12", "M30", "M30", "M22", "M22"];
+  // Remove the duplicates
   expect(removeDuplicates(data).length).toBe(3);
-  expect(removeDuplicates(data)).toBe(["ME12", "M30", "M22"]);
+  expect(removeDuplicates(data)).toEqual(["ME12", "M30", "M22"]);
+
+  data = [1, 3, 3, 2, 1, 3, 45, 56, 6, 6, 5, 4, 3, 3, 2];
+
+  expect(removeDuplicates(data).length).toBe(8);
+  expect(removeDuplicates(data)).toEqual([1, 3, 2, 45, 56, 6, 5, 4]);
+
 });
 
 test("it includes total count of postcodes", () => {
