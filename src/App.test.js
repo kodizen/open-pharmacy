@@ -11,6 +11,7 @@ import {
   getPostCodeCount,
   getPostCodePercentage,
   getFormattedData,
+  getHistogramData
 } from "./helpers.js";
 
 test("renders a histogram", () => {});
@@ -236,7 +237,7 @@ test("it gets labels for histogram", () => {
     getHistogramLabels(data).toContain(["ME12 (50%)", "M30 (30%)", "M22 (20%)"])
   );
 });
-test("it gets labels for histogram", () => {
+test("it gets data for histogram", () => {
   const data = [
     {
       postcode: "ME12",
@@ -256,7 +257,7 @@ test("it gets labels for histogram", () => {
   ];
   expect(getHistogramData(data).length).toBe(3);
 
-  expect(getHistogramData(data).toContain([5, 3, 2]));
+  expect(getHistogramData(data)).toEqual([5, 3, 2]);
 });
 //To achieve this, order array by highest number of counts/ percentages
 // test("it produces a list of top 5 postcodes", () => {

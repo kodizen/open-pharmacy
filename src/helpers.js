@@ -10,7 +10,6 @@ export function getOutwardPostCode(postcode) {
 }
 
 export function getPostCodeArray(data) {
-  console.log("getPostCodeArray -> data", data);
   const error = "Sorry, that's an invalid array";
 
   // Is it an array?
@@ -91,4 +90,8 @@ export function getFormattedData(data) {
     });
   });
   return returnedArray;
+}
+
+export function getHistogramData(data) {
+  return data.map(({ count }) => count);
 }
