@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/open-pharmacy/static/css/main.5f361e03.chunk.css",
+    "main.js": "/open-pharmacy/static/js/main.810697d9.chunk.js",
+    "main.js.map": "/open-pharmacy/static/js/main.810697d9.chunk.js.map",
+    "runtime-main.js": "/open-pharmacy/static/js/runtime-main.54cb6481.js",
+    "runtime-main.js.map": "/open-pharmacy/static/js/runtime-main.54cb6481.js.map",
+    "static/js/2.bb05609f.chunk.js": "/open-pharmacy/static/js/2.bb05609f.chunk.js",
+    "static/js/2.bb05609f.chunk.js.map": "/open-pharmacy/static/js/2.bb05609f.chunk.js.map",
+    "index.html": "/open-pharmacy/index.html",
+    "precache-manifest.433490476de1b89923223f2cc424073c.js": "/open-pharmacy/precache-manifest.433490476de1b89923223f2cc424073c.js",
+    "service-worker.js": "/open-pharmacy/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/open-pharmacy/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.bb05609f.chunk.js.LICENSE.txt": "/open-pharmacy/static/js/2.bb05609f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.54cb6481.js",
+    "static/js/2.bb05609f.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.810697d9.chunk.js"
+  ]
+}
