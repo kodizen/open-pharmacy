@@ -51,10 +51,12 @@ export function removeDuplicates(data) {
   let unique_array = Array.from(new Set(data));
   return unique_array;
 }
+
 export function getTotalCount(data) {
   // Kinda pointless this one...
   return removeDuplicates(data).length;
 }
+
 export function getPostCodeCount(data, postcode) {
   let count = 0;
   for (let index = 0; index < data.length; index++) {
@@ -66,8 +68,7 @@ export function getPostCodeCount(data, postcode) {
 }
 
 export function getPostCodePercentage(data, postcode) {
-  return ((getPostCodeCount(data, postcode) / data.length) * 100).toFixed(2)
-  
+  return ((getPostCodeCount(data, postcode) / data.length) * 100).toFixed(2);
 }
 
 export function getFormattedData(data) {
@@ -87,7 +88,6 @@ export function getFormattedData(data) {
 
     //Get the postcode percentage
     const percentage = getPostCodePercentage(outwardPostcodes, postcode);
-    console.log("getFormattedData -> percentage", percentage)
 
     // return it
     returnedArray.push({
@@ -107,7 +107,8 @@ export function getHistogramLabels(data) {
   return data.map(({ postcode, percentage }) => `${postcode} (${percentage}%)`);
 }
 
-export function getTop5Postcodes(data){
-  return data.sort((a, b) => parseFloat(b.count) - parseFloat(a.count)).slice(0,5);
-
+export function getTop5Postcodes(data) {
+  return data
+    .sort((a, b) => parseFloat(b.count) - parseFloat(a.count))
+    .slice(0, 5);
 }
