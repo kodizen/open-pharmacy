@@ -11,7 +11,8 @@ import {
   getPostCodeCount,
   getPostCodePercentage,
   getFormattedData,
-  getHistogramData
+  getHistogramLabels,
+  getHistogramData,
 } from "./helpers.js";
 
 test("renders a histogram", () => {});
@@ -233,9 +234,11 @@ test("it gets labels for histogram", () => {
   ];
   expect(getHistogramLabels(data).length).toBe(3);
 
-  expect(
-    getHistogramLabels(data).toContain(["ME12 (50%)", "M30 (30%)", "M22 (20%)"])
-  );
+  expect(getHistogramLabels(data)).toEqual([
+    "ME12 (50%)",
+    "M30 (30%)",
+    "M22 (20%)",
+  ]);
 });
 test("it gets data for histogram", () => {
   const data = [

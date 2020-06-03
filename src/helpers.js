@@ -95,3 +95,7 @@ export function getFormattedData(data) {
 export function getHistogramData(data) {
   return data.map(({ count }) => count);
 }
+
+export function getHistogramLabels(data){
+    return data.map(({ postcode, percentage }) => `${postcode} (${percentage}%)`);
+}
