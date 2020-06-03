@@ -106,3 +106,8 @@ export function getHistogramData(data) {
 export function getHistogramLabels(data) {
   return data.map(({ postcode, percentage }) => `${postcode} (${percentage}%)`);
 }
+
+export function getTop5Postcodes(data){
+  return data.sort((a, b) => a.count + b.count).slice(0,5);
+
+}

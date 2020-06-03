@@ -13,6 +13,7 @@ import {
   getFormattedData,
   getHistogramLabels,
   getHistogramData,
+  getTop5Postcodes
 } from "./helpers.js";
 
 test("renders a histogram", () => {});
@@ -83,7 +84,6 @@ test("it extracts an array of postcodes from an array of objects", () => {
     "M22 5HT",
     "M22 1ED",
   ]);
-
 });
 
 test("it returns an error if list of postcodes is invalid", () => {
@@ -272,41 +272,68 @@ test("it gets data for histogram", () => {
 });
 
 test("it produces a list of top 5 postcodes", () => {
-  // Given a an array of postcodes with counts
+  // Given an array of postcodes with counts
   const data = [
     {
       postcode: "ME12",
-      count: 5,
-      percentage: "50.00",
+      count: 100,
     },
     {
       postcode: "M30",
-      count: 3,
-      percentage: "30.00",
+      count: 95,
     },
     {
       postcode: "M22",
+      count: 86,
+
+    },
+    {
+      postcode: "M4",
+      count: 78,
+    },
+    {
+      postcode: "M2",
+      count: 6,
+    },
+    {
+      postcode: "MK12",
+      count: 5,
+    },
+    {
+      postcode: "M32",
+      count: 7,
+    },
+    {
+      postcode: "M33",
+      count: 3,
+    },
+    {
+      postcode: "M1",
       count: 2,
-      percentage: "20.00",
     },
   ];
-  expect(getHistogramData(data).length).toBe(3);
+  expect(getTop5Postcodes(data).length).toBe(5);
 
-  expect(getHistogramData(data)).toEqual([5, 3, 2]);
-  // We get the top 5 postcodes
-  expect(0).toBe(true)
+  expect(getTop5Postcodes(data)).toEqual([
+    {
+      postcode: "ME12",
+      count: 100,
+    },
+    {
+      postcode: "M30",
+      count: 95,
+    },
+    {
+      postcode: "M22",
+      count: 86,
+    },
+    {
+      postcode: "M4",
+      count: 78,
+    },
+    {
+      postcode: "M2",
+      count: 6,
+    },
+  ]);
 });
-
-// test("it includes the datestamp if one is provided", () => {
-//   // Given a datestamp in the object
-//   // We are returned the same datestamp
-//   expect(0).toBe(true)
-
-// });
-
-// test("it includes todays date as a datestamp if one is not provided", () => {
-//   // Given no datestamp in the object
-//   // We are returned todays datestamp
-//   expect(0).toBe(true)
-
-// });
