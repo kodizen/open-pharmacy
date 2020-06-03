@@ -66,7 +66,8 @@ export function getPostCodeCount(data, postcode) {
 }
 
 export function getPostCodePercentage(data, postcode) {
-  return Math.floor((getPostCodeCount(data, postcode) / data.length) * 100);
+  return ((getPostCodeCount(data, postcode) / data.length) * 100).toFixed(2)
+  
 }
 
 export function getFormattedData(data) {
@@ -86,6 +87,7 @@ export function getFormattedData(data) {
 
     //Get the postcode percentage
     const percentage = getPostCodePercentage(outwardPostcodes, postcode);
+    console.log("getFormattedData -> percentage", percentage)
 
     // return it
     returnedArray.push({

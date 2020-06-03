@@ -184,9 +184,9 @@ test("it gets a postcodes percentage", () => {
     "M22",
   ];
   // We are returned an array of postcode objects, with the percentage of total postcode
-  expect(getPostCodePercentage(data, "ME12")).toBe(50);
-  expect(getPostCodePercentage(data, "M30")).toBe(20);
-  expect(getPostCodePercentage(data, "M22")).toBe(30);
+  expect(getPostCodePercentage(data, "ME12")).toBe(50.00);
+  expect(getPostCodePercentage(data, "M30")).toBe(20.00);
+  expect(getPostCodePercentage(data, "M22")).toBe(30.00);
 });
 
 test("it gets a returned array of correctly formatted postcodes", () => {
@@ -270,12 +270,32 @@ test("it gets data for histogram", () => {
 
   expect(getHistogramData(data)).toEqual([5, 3, 2]);
 });
-//To achieve this, order array by highest number of counts/ percentages
-// test("it produces a list of top 5 postcodes", () => {
-//   // Given a an array of postcodes with counts
-//   // We get the top 5 postcodes
-//   expect(0).toBe(true)
-// });
+
+test("it produces a list of top 5 postcodes", () => {
+  // Given a an array of postcodes with counts
+  const data = [
+    {
+      postcode: "ME12",
+      count: 5,
+      percentage: 50,
+    },
+    {
+      postcode: "M30",
+      count: 3,
+      percentage: 30,
+    },
+    {
+      postcode: "M22",
+      count: 2,
+      percentage: 20,
+    },
+  ];
+  expect(getHistogramData(data).length).toBe(3);
+
+  expect(getHistogramData(data)).toEqual([5, 3, 2]);
+  // We get the top 5 postcodes
+  expect(0).toBe(true)
+});
 
 // test("it includes the datestamp if one is provided", () => {
 //   // Given a datestamp in the object

@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Histogram from "react-chart-histogram";
 import data from "./data.json";
