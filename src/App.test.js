@@ -40,6 +40,7 @@ test("it handles incorrect postcodes", () => {
   // We are returned an error / a null object
   expect(returnedValue).toEqual(false);
 });
+
 test("it extracts an array of postcodes from an array of objects", () => {
   // Given a list of postcodes
   const data = [
@@ -50,7 +51,13 @@ test("it extracts an array of postcodes from an array of objects", () => {
       postcode: "ME12 2EF",
     },
     {
+      postcode: "2323432 4FG",
+    },
+    {
       postcode: "ME12 4FG",
+    },
+    {
+      postcode: "ewfefe 44",
     },
     {
       postcode: "M30 5TG",
@@ -76,6 +83,7 @@ test("it extracts an array of postcodes from an array of objects", () => {
     "M22 5HT",
     "M22 1ED",
   ]);
+
 });
 
 test("it returns an error if list of postcodes is invalid", () => {

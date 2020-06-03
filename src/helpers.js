@@ -28,15 +28,20 @@ export function getPostCodeArray(data) {
 
   let arr = [];
   data.forEach((element) => {
-    arr.push(element.postcode);
+    if (isValidPostCode(element.postcode)) {
+      arr.push(element.postcode);
+    }
   });
   return arr;
 }
 
 export function getOutwardPostCodes(data) {
   let arr = [];
-  data.forEach((element) => {
-    arr.push(getOutwardPostCode(element));
+  data.forEach((postcode) => {
+    // If the postcode isn't valid, dont include it
+    if (isValidPostCode(postcode)) {
+      arr.push(getOutwardPostCode(postcode));
+    }
   });
   return arr;
 }
@@ -96,6 +101,6 @@ export function getHistogramData(data) {
   return data.map(({ count }) => count);
 }
 
-export function getHistogramLabels(data){
-    return data.map(({ postcode, percentage }) => `${postcode} (${percentage}%)`);
+export function getHistogramLabels(data) {
+  return data.map(({ postcode, percentage }) => `${postcode} (${percentage}%)`);
 }
