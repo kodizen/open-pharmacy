@@ -48,20 +48,47 @@ export function removeDuplicates(data) {
   return unique_array;
 }
 export function getTotalCount(data) {
-    // Kinda pointless this one...
+  // Kinda pointless this one...
   return removeDuplicates(data).length;
 }
-export function getPostCodeCount(data, postcode){
-    let count = 0
-    for (let index = 0; index < data.length; index++) {
-        if (data[index] === postcode){
-            count++
-        }  
+export function getPostCodeCount(data, postcode) {
+  let count = 0;
+  for (let index = 0; index < data.length; index++) {
+    if (data[index] === postcode) {
+      count++;
     }
-    return count
+  }
+  return count;
 }
 
-export function getPostCodePercentage(data, postcode){
-    return Math.floor((getPostCodeCount(data, postcode) / data.length) * 100)
+export function getPostCodePercentage(data, postcode) {
+  return Math.floor((getPostCodeCount(data, postcode) / data.length) * 100);
 }
 
+export function getFormattedData(data) {
+  // Get a list of just the outward postcodes
+  let outwardPostcodes = getOutwardPostCodes(data);
+
+  // Get a list of outward postcodes, with duplicates removed - to loop over
+  let dataWithNoDuplicates = removeDuplicates(outwardPostcodes);
+
+  // Set up an array to be returned
+  let returnedArray = [];
+
+  // For each of our outward postcodes ...
+  dataWithNoDuplicates.forEach((postcode) => {
+    // Get the postcode count
+    const count = getPostCodeCount(outwardPostcodes, postcode);
+
+    //Get the postcode percentage
+    const percentage = getPostCodePercentage(outwardPostcodes, postcode);
+
+    // return it
+    returnedArray.push({
+      postcode,
+      count,
+      percentage,
+    });
+  });
+  return returnedArray;
+}

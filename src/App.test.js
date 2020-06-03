@@ -9,7 +9,8 @@ import {
   removeDuplicates,
   getTotalCount,
   getPostCodeCount,
-  getPostCodePercentage
+  getPostCodePercentage,
+  getFormattedData,
 } from "./helpers.js";
 
 test("renders a histogram", () => {});
@@ -129,7 +130,6 @@ test("it removes duplicates", () => {
 
   expect(removeDuplicates(data).length).toBe(8);
   expect(removeDuplicates(data)).toEqual([1, 3, 2, 45, 56, 6, 5, 4]);
-
 });
 
 test("it gets total count of postcodes", () => {
@@ -179,48 +179,21 @@ test("it gets a postcodes percentage", () => {
   expect(getPostCodePercentage(data, "M22")).toBe(30);
 });
 
-
-
 test("it gets a returned array of correctly formatted postcodes", () => {
-  const data = {
-    data: {
-      date: "2019-01-17T09:34:18.171Z",
-      list: [
-        {
-          postcode: "ME12 1ED",
-        },
-        {
-          postcode: "ME12 2EF",
-        },
-        {
-          postcode: "ME12 4FG",
-        },
-        {
-          postcode: "ME12 2EF",
-        },
-        {
-          postcode: "ME12 4FG",
-        },
-        {
-          postcode: "M30 5TG",
-        },
-        {
-          postcode: "M30 4EF",
-        },
-        {
-          postcode: "M30 4EF",
-        },
-        {
-          postcode: "M22 5HT",
-        },
-        {
-          postcode: "M22 1ED",
-        },
-      ],
-    },
-  };
+  const data = [
+    "ME12 1ED",
+    "ME12 2EF",
+    "ME12 4FG",
+    "ME12 2EF",
+    "ME12 4FG",
+    "M30 5TG",
+    "M30 4EF",
+    "M30 4EF",
+    "M22 5HT",
+    "M22 1ED",
+  ];
 
-  expect(getFormattedData(data)).toBe([
+  expect(getFormattedData(data)).toEqual([
     {
       postcode: "ME12",
       count: 5,
