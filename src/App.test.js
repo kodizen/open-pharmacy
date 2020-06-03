@@ -184,9 +184,9 @@ test("it gets a postcodes percentage", () => {
     "M22",
   ];
   // We are returned an array of postcode objects, with the percentage of total postcode
-  expect(getPostCodePercentage(data, "ME12")).toBe(50.00);
-  expect(getPostCodePercentage(data, "M30")).toBe(20.00);
-  expect(getPostCodePercentage(data, "M22")).toBe(30.00);
+  expect(getPostCodePercentage(data, "ME12")).toBe("50.00");
+  expect(getPostCodePercentage(data, "M30")).toBe("20.00");
+  expect(getPostCodePercentage(data, "M22")).toBe("30.00");
 });
 
 test("it gets a returned array of correctly formatted postcodes", () => {
@@ -207,17 +207,17 @@ test("it gets a returned array of correctly formatted postcodes", () => {
     {
       postcode: "ME12",
       count: 5,
-      percentage: 50,
+      percentage: "50.00",
     },
     {
       postcode: "M30",
       count: 3,
-      percentage: 30,
+      percentage: "30.00",
     },
     {
       postcode: "M22",
       count: 2,
-      percentage: 20,
+      percentage: "20.00",
     },
   ]);
 });
@@ -253,17 +253,17 @@ test("it gets data for histogram", () => {
     {
       postcode: "ME12",
       count: 5,
-      percentage: 50,
+      percentage: "50.00",
     },
     {
       postcode: "M30",
       count: 3,
-      percentage: 30,
+      percentage: "30.00",
     },
     {
       postcode: "M22",
       count: 2,
-      percentage: 20,
+      percentage: "20.00",
     },
   ];
   expect(getHistogramData(data).length).toBe(3);
@@ -277,17 +277,17 @@ test("it produces a list of top 5 postcodes", () => {
     {
       postcode: "ME12",
       count: 5,
-      percentage: 50,
+      percentage: "50.00",
     },
     {
       postcode: "M30",
       count: 3,
-      percentage: 30,
+      percentage: "30.00",
     },
     {
       postcode: "M22",
       count: 2,
-      percentage: 20,
+      percentage: "20.00",
     },
   ];
   expect(getHistogramData(data).length).toBe(3);
