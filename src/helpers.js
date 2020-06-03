@@ -108,6 +108,6 @@ export function getHistogramLabels(data) {
 }
 
 export function getTop5Postcodes(data){
-  return data.sort((a, b) => a.count + b.count).slice(0,5);
+  return data.sort((a, b) => parseFloat(b.count) - parseFloat(a.count)).slice(0,5);
 
 }

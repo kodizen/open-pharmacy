@@ -13,7 +13,7 @@ import {
   getFormattedData,
   getHistogramLabels,
   getHistogramData,
-  getTop5Postcodes
+  getTop5Postcodes,
 } from "./helpers.js";
 
 test("renders a histogram", () => {});
@@ -285,7 +285,6 @@ test("it produces a list of top 5 postcodes", () => {
     {
       postcode: "M22",
       count: 86,
-
     },
     {
       postcode: "M4",
@@ -332,8 +331,8 @@ test("it produces a list of top 5 postcodes", () => {
       count: 78,
     },
     {
-      postcode: "M2",
-      count: 6,
+      postcode: "M32",
+      count: 7,
     },
   ]);
 });
